@@ -16,6 +16,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
   }
 
+  selecionarMenu(menu: string){
+    try {
+      this.menuSelecionado = menu;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   ngOnInit(): void {
   }
 

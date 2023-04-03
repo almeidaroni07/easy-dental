@@ -9,25 +9,25 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a class="nav-link link-dark" aria-current="page" routerLink="/agendamento" routerLinkActive="activeLink">
+        <a class="nav-link link-dark" routerLink="/agendamento" routerLinkActive="activeLink" (click)="selecionarMenu('Agendamentos')">
           <i class="fa fa-calendar"></i>
           Agendamento
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link link-dark" routerLink="/paciente" routerLinkActive="activeLink">
+        <a class="nav-link link-dark" routerLink="/paciente" routerLinkActive="activeLink" (click)="selecionarMenu('Pacientes')">
           <i class="fa fa-users"></i> 
           Pacientes
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link link-dark" routerLink="/procedimentos" routerLinkActive="activeLink">
+        <a class="nav-link link-dark" routerLink="/procedimentos" routerLinkActive="activeLink" (click)="selecionarMenu('Procedimentos')">
           <i class="fa fa-user-nurse"></i>
           Procedimentos
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link link-dark" routerLink="/orcamento" routerLinkActive="activeLink">
+        <a class="nav-link link-dark" routerLink="/orcamento" routerLinkActive="activeLink" (click)="selecionarMenu('Orçamentos')">
           <i class="fa fa-shopping-cart"></i>
           Orçamento
         </a>
