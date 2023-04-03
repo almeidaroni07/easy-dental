@@ -1,0 +1,59 @@
+<div class="d-flex flex-nowrap">
+
+  <div class="b-example-divider b-example-vr"></div>
+
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <a class="">
+      <img class="rounded mx-auto d-block" width="80" height="70" src="assets/img/logoDRAThais.png" />
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a class="nav-link link-dark" aria-current="page" routerLink="/agendamento" routerLinkActive="activeLink">
+          <i class="fa fa-calendar"></i>
+          Agendamento
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark" routerLink="/paciente" routerLinkActive="activeLink">
+          <i class="fa fa-users"></i> 
+          Pacientes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark" routerLink="/procedimentos" routerLinkActive="activeLink">
+          <i class="fa fa-user-nurse"></i>
+          Procedimentos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark" routerLink="/orcamento" routerLinkActive="activeLink">
+          <i class="fa fa-shopping-cart"></i>
+          Orçamento
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark">
+          <i class="fa fa-coins"></i>
+          Financeiro
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link link-dark">
+         <i class="fa fa-file"></i>
+          Arquivo
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+         <img class="rounded-circle me-2" src="assets/img/foto.png" id="userLogin" width="30" height="30"> Dra Thais 
+      </a>
+      <div class="dropdown-menu text-small shadow">
+        <a class="dropdown-item" (click)="logout()">Sair</a>
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,88 @@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Novo Paciente</h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="salvar()">
+    <div class="modal-body">
+
+        
+            <div class="row">
+                <div class="col-sm-6">
+                <div class="card border-0">
+                    <div class="card-body">
+                            <div class="form-group">
+                                <label for="formAddPcienteNome">Nome</label>
+                                <input type="text" class="form-control" id="formAddPcienteNome" aria-describedby="emailHelp" placeholder="Nome" formControlName="nome">
+                                <app-validators-message message="Usuário é um campo obrigatório."
+                                                        *ngIf="form.get('nome')?.errors && form.get('nome')?.touched"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteEmail">Email</label>
+                                <input type="email" class="form-control" id="formAddPcienteEmail" placeholder="Email" formControlName="email">
+                                <app-validators-message message="Email é um campo obrigatório."
+                                                        *ngIf="form.get('email')?.errors && form.get('email')?.touched"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteCPF">CPF</label>
+                                <input type="text" class="form-control" id="formAddPcienteCPF" placeholder="CPF" formControlName="cpf">
+                                <app-validators-message message="CPF é um campo obrigatório."
+                                                        *ngIf="form.get('cpf')?.errors && form.get('cpf')?.touched"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteRG">RG</label>
+                                <input type="text" class="form-control" id="formAddPcienteRG" placeholder="RG" formControlName="rg">
+                                <app-validators-message message="RG é um campo obrigatório."
+                                                        *ngIf="form.get('rg')?.errors && form.get('rg')?.touched"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteNascimento">Data Nascimento</label>
+                                <input type="date" class="form-control" id="formAddPcienteNascimento" placeholder="Data Nascimento" formControlName="dataNascimento">
+                                <app-validators-message message="Data Nascimento é um campo obrigatório."
+                                                        *ngIf="form.get('dataNascimento')?.errors && form.get('dataNascimento')?.touched"/>
+                            </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card border-0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="formAddPcienteRua">Rua</label>
+                                    <input type="text" class="form-control" id="formAddPcienteRua" aria-describedby="emailHelp" placeholder="Rua" formControlName="rua">
+                                    <app-validators-message message="Rua é um campo obrigatório."
+                                                            *ngIf="form.get('rua')?.errors && form.get('rua')?.touched"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formAddPcienteBairro">Bairro</label>
+                                    <input type="text" class="form-control" id="formAddPcienteBairro" placeholder="Bairro" formControlName="bairro">
+                                    <app-validators-message message="Bairro é um campo obrigatório."
+                                                            *ngIf="form.get('bairro')?.errors && form.get('bairro')?.touched"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formAddPcienteCidade">Cidade</label>
+                                    <input type="text" class="form-control" id="formAddPcienteCidade" placeholder="Cidade" formControlName="cidade">
+                                    <app-validators-message message="Cidade é um campo obrigatório."
+                                                            *ngIf="form.get('cidade')?.errors && form.get('cidade')?.touched"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formAddPcienteEstado">Estado</label>
+                                    <input type="text" class="form-control" id="formAddPcienteEstado" placeholder="Estado" formControlName="estado">
+                                    <app-validators-message message="Estado é um campo obrigatório."
+                                                            *ngIf="form.get('estado')?.errors && form.get('estado')?.touched"/>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Cancelar</button>
+        <button type="submit" class="btn" [disabled]="!form.valid" [ngClass]="botaoHabilitado()">Salvar</button>
+    </div>
+</form>

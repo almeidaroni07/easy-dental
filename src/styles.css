@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+
+body, html {
+    width:100%;
+    height:100%;
+    margin: 0;
+    background-image: url("assets/img/backgroundLogo.png");
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center center;
+  }
+
+  .cdk-overlay-container{
+    z-index: 9999 !important;
+  }
+
+
+  .my-custom-scrollbar {
+    position: relative;
+    height: 800px;
+    overflow: auto;
+  }
+
+

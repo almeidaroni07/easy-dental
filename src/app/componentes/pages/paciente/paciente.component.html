@@ -1,0 +1,38 @@
+<div class="container-fluid">
+
+  <app-message message={{responseMessage.message}}
+              class="{{true == responseMessage.error ? 'alert-danger' : 'alert-success'}}"
+              *ngIf="'' != responseMessage.message"/>
+
+    <button (click)="openModalAddPaciente()" type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-plus"></i> Adicionar</button>
+
+    <table mdbTable #tableEl="mdbTable" class="table table-striped">
+      <thead>
+      <tr>
+        <th *ngFor="let head of headElements; let i = index" scope="col">{{ head }}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of elements; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"scope="row">{{ el.id }}</th>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{ el.nome }}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{ el.email }}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{ el.status }}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{ el.ultimaConsultaFmt }}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalUpdateAnamnese(el.id, el.nome)"><i class="fa fa-id-card"></i></a></td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalEditPaciente(el.id)"><i class="fas fa-pencil-alt"></i></a></td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalDeletePaciente(el.id, el.nome)"><i class="fa fa-trash"></i></a></td>
+      </tr>
+      </tbody>
+      <tfoot class="">
+      <tr>
+        <td colspan="4">
+          <div class="position-absolute end-0">
+            <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>

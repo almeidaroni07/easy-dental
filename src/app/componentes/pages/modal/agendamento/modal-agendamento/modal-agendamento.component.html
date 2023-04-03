@@ -1,0 +1,142 @@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Novo Tratamento</h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="salvar()" *ngIf="form">
+    <div class="modal-body">
+          
+            
+         <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start" >
+            <mat-tab label="Paciente">
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body">
+                                    
+                                <div class="form-group">
+                                    <label for="selectPaciente">Paciente</label>
+                                    <select class="form-control" id="selectPaciente" formControlName="pacienteID">
+                                        <option *ngFor="let paciente of selectPacientes" value= {{paciente.id}}> {{paciente.nome}} </option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="selectFormaPagamento">Forma de pagamento</label>
+                                    <select class="form-control" id="selectFormaPagamento" formControlName="formaPagamento">
+                                      <option value="CREDITO">CREDITO</option>
+                                      <option value="DEBITO">DEBITO</option>
+                                      <option value="PIX">PIX</option>
+                                      <option value="DINHEIRO">DINHEIRO</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="assinatura">Assinatura</label>
+                                    <br>
+                                    <input type="file" class="form-control-file" id="assinatura" formControlName="assinatura">
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Agendamento">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                    <div class="card border-0">
+                        <div class="card-body">
+                                
+                            <div class="form-group">
+                                <label for="selectProcedimento">Procedimento</label>
+                                <select class="form-control" id="selectProcedimento" formControlName="procedimentoID">
+                                    <option *ngFor="let procedimento of selectProcedimento" value= {{procedimento.id}}> {{procedimento.nome}} </option>
+                                </select>
+                            </div>
+                            <br>            
+                            <br>
+                            <div class="form-group">
+                                <label for="inputHora">Inicio</label>
+                                <br>
+                                <mat-form-field appearance="outline">
+                                    <input id="inputHora" type="time" matInput name="week" min="09:00" max="18:00"  formControlName="inicio"/>
+                                </mat-form-field>
+                            </div>
+                            <br>
+                            <button (click)="salvarAgendamento()" type="button" class="btn btn-primary">Adicionar</button>
+                            
+    
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <div class="card-body">
+                            
+                                <div class="form-group">
+                                    <label for="inputData">Data</label>
+                                    <br>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Selecione a data</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="data">
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="inputHora">Fim</label>
+                                    <br>
+                                    <mat-form-field appearance="outline">
+                                        <input id="inputHora" type="time" matInput name="week" min="09:00" max="18:00" formControlName="fim"/>
+                                    </mat-form-field>
+                                </div>
+                                <br>
+
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 list-group-light">
+                        <div class="card border-0">
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                      <th *ngFor="let head of headElements; let i = index" scope="col">{{ head }}
+                                      </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let el of elements; let i = index">
+                                      <td>{{ el.procedimentoNome }}</td>
+                                      <td>{{ el.data | date:'short' }}</td>
+                                      <td>{{ el.inicio }}</td>
+                                      <td>{{ el.fim }}</td>
+                                      <td><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Cancelar</button>
+        <button type="submit" class="btn">Salvar</button>
+    </div>
+</form>

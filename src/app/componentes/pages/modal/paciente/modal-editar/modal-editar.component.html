@@ -1,0 +1,97 @@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Editar Paciente <span>{{ nome }}</span></h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="update()" *ngIf="form">
+    <div class="modal-body">
+
+        
+            <div class="row">
+                <div class="col-sm-6">
+                <div class="card border-0">
+                    <div class="card-body">
+                            <div class="form-group">
+                                <label for="formAddPcienteNome">Nome</label>
+                                <input type="text" class="form-control" id="formAddPcienteNome" aria-describedby="emailHelp" placeholder="Nome" formControlName="nome">
+                                <div *ngIf="form.get('nome')?.errors && form.get('nome')?.touched">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteEmail">Email</label>
+                                <input type="email" class="form-control" id="formAddPcienteEmail" placeholder="Email" formControlName="email">
+                                <div *ngIf="form.get('email')?.errors && form.get('email')?.touched">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteCPF">CPF</label>
+                                <input type="text" class="form-control" id="formAddPcienteCPF" placeholder="CPF" formControlName="cpf">
+                                <div *ngIf="form.get('cpf')?.errors && form.get('cpf')?.touched">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteRG">RG</label>
+                                <input type="text" class="form-control" id="formAddPcienteRG" placeholder="RG" formControlName="rg">
+                                <div *ngIf="form.get('rg')?.errors && form.get('rg')?.touched">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddPcienteNascimento">Data Nascimento</label>
+                                <input type="date" class="form-control" id="formAddPcienteNascimento" placeholder="Data Nascimento" formControlName="dataNascimento">
+                                <div *ngIf="form.get('dataNascimento')?.errors && form.get('dataNascimento')?.touched">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card border-0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="formAddPcienteRua">Rua</label>
+                                    <input type="text" class="form-control" id="formAddPcienteRua" aria-describedby="emailHelp" placeholder="Rua" formControlName="rua">
+                                    <div *ngIf="form.get('rua')?.errors && form.get('rua')?.touched">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formAddPcienteBairro">Bairro</label>
+                                    <input type="text" class="form-control" id="formAddPcienteBairro" placeholder="Bairro" formControlName="bairro">
+                                    <div *ngIf="form.get('bairro')?.errors && form.get('bairro')?.touched">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formAddPcienteCidade">Cidade</label>
+                                    <input type="text" class="form-control" id="formAddPcienteCidade" placeholder="Cidade" formControlName="cidade">
+                                    <div *ngIf="form.get('cidade')?.errors && form.get('cidade')?.touched">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="formAddPcienteEstado">Estado</label>
+                                    <input type="text" class="form-control" id="formAddPcienteEstado" placeholder="Estado" formControlName="estado">
+                                    <div *ngIf="form.get('estado')?.errors && form.get('estado')?.touched">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Cancelar</button>
+        <button type="submit" class="btn" [disabled]="!form.valid" [ngClass]="botaoHabilitado()">Salvar</button>
+    </div>
+</form>

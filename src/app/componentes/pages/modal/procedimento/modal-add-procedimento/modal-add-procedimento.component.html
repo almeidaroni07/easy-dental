@@ -1,0 +1,38 @@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Novo Procedimento</h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="salvar()">
+    <div class="modal-body">
+
+        <div class="form-group row">
+            <label for="inputNome" class="col-sm-2 col-form-label">Nome</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputNome" placeholder="Nome" formControlName="nome">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="inputValor" class="col-sm-2 col-form-label">Valor R$</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputValor" placeholder="R$" formControlName="valor">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="inputCor" class="col-sm-2 col-form-label">Cor</label>
+            <div class="col-sm-10">
+                <input id="inputCor" ejs-colorpicker type="color" value="#344aae" cssClass="e-custom-picker" formControlName="cor"/>
+            </div>
+        </div>
+               
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Cancelar</button>
+        <button type="submit" class="btn" [disabled]="!form.valid" [ngClass]="botaoHabilitado()">Salvar</button>
+    </div>
+</form>

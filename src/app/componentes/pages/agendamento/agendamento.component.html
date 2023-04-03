@@ -1,0 +1,32 @@
+<div class="row">
+
+  <app-message message={{responseMessage.message}}
+                class="{{true == responseMessage.error ? 'alert-danger' : 'alert-success'}}"
+                *ngIf="'' != responseMessage.message"/>
+
+  <div class="col-sm-4">
+    <div class="card border-0">
+      <div class="card-body my-custom-scrollbar">
+        <button (click)="openModalAddAgendamento()" type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-plus"></i></button>
+        
+        <ul class="list-group list-group-light">
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let agendamento of agendamentos">
+            <div>
+              <div class="fw-bold">{{agendamento.paciente}}</div>
+              <div class="text-muted">{{agendamento.procedimento}}</div>
+            </div>
+            <span class="badge rounded-pill badge-success">{{agendamento.inicio}} - {{agendamento.fim}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <div class="card border-0">
+      <div class="card-body my-custom-scrollbar">
+        <app-calendario></app-calendario>
+      </div>
+    </div>
+  </div>
+  
+</div>
