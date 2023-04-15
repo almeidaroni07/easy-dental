@@ -33,6 +33,12 @@ import { ValidatorsMessageComponent } from './templates/message/validators-messa
 import { MessageComponent } from './templates/message/message/message.component';
 import { OrcamentoComponent } from './orcamento/orcamento.component';
 import { ModalProcedimentoComponent } from './modal/agendamento/modal-procedimento/modal-procedimento.component';
+import { AssinaturaComponent } from './modal/agendamento/assinatura/assinatura.component';
+import { ArquivosComponent } from "./arquivos/arquivos.component";
+import { AddArquivoComponent } from './modal/arquivo/add-arquivo/add-arquivo.component';
+import { OpenArquivoComponent } from './modal/arquivo/open-arquivo/open-arquivo.component';
+import { ModalEditarArquivoComponent } from './modal/arquivo/modal-editar-arquivo/modal-editar-arquivo.component';
+import { ModalDeleteArquivoComponent } from './modal/arquivo/modal-delete-arquivo/modal-delete-arquivo.component';
 
 @NgModule({
     declarations:[
@@ -55,7 +61,13 @@ import { ModalProcedimentoComponent } from './modal/agendamento/modal-procedimen
         ValidatorsMessageComponent,
         MessageComponent,
         OrcamentoComponent,
-        ModalProcedimentoComponent
+        ModalProcedimentoComponent,
+        AssinaturaComponent,
+        ArquivosComponent,
+        AddArquivoComponent,
+        OpenArquivoComponent,
+        ModalEditarArquivoComponent,
+        ModalDeleteArquivoComponent
     ],
     imports:[
         CommonModule,

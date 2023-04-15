@@ -1,7 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MdbTableDirective, MdbTablePaginationComponent } from 'ng-uikit-pro-standard';
 import { AgendamentoService } from 'src/app/core/agendamento/agendamento.service';
 import { Agendamento } from 'src/app/core/model/agendamento';
 import { Paciente } from 'src/app/core/model/paciente';
@@ -24,6 +23,7 @@ export class ModalAgendamentoComponent implements OnInit {
 
   @Output() passMessage: EventEmitter<any> = new EventEmitter();
   form !: FormGroup;
+  file: File;
   
   constructor(public activeModal: NgbActiveModal,
               private formBuilder: FormBuilder,
@@ -54,8 +54,23 @@ export class ModalAgendamentoComponent implements OnInit {
 
   salvar(){
     this.service.salvar(this.form.value, this.elements).subscribe(resp =>{
-      this.passMessage.emit({error: false, message: 'Tratamento adicionado com sucesso.'});
-      this.activeModal.close();
+      const tratamentoID : number | any = resp;
+      console.log("file name: "+this.file.name);
+      this.service.atualizarAssinatura(tratamentoID, this.file).subscribe(
+        
+        resp =>{
+            if('OK' == resp){
+              this.passMessage.emit({error: false, message: 'Tratamento adicionado com sucesso.'});
+            }else{
+              this.passMessage.emit({error: true, message: resp});
+            }
+            this.activeModal.close();
+       },
+       error =>{
+        this.passMessage.emit({error: true, message: "Error inesperado"});
+        this.activeModal.close();
+       }
+      );
     });
   }
 
@@ -87,6 +102,15 @@ export class ModalAgendamentoComponent implements OnInit {
     }
   }
 
+  onChangeFile(event: any){
+    try {
+      const files = <FileList> event.srcElement.files;
+      this.file = files[0];
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   botaoHabilitado(): string{
     if(this.form.valid){
       return 'btn-info';
@@ -98,3 +122,7 @@ export class ModalAgendamentoComponent implements OnInit {
 
 
 }
+function messageResponse(value: string): void {
+  throw new Error('Function not implemented.');
+}
+

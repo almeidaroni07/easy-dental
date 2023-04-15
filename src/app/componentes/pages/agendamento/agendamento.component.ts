@@ -4,6 +4,7 @@ import { ModalAgendamentoComponent } from '../modal/agendamento/modal-agendament
 import { Response } from 'src/app/core/message/response';
 import { AgendamentoResponse } from 'src/app/core/model/angedamentoResponse';
 import { AgendamentoService } from 'src/app/core/agendamento/agendamento.service';
+import { AssinaturaComponent } from '../modal/agendamento/assinatura/assinatura.component';
 
 @Component({
   selector: 'app-agendamento',
@@ -51,6 +52,16 @@ export class AgendamentoComponent implements OnInit, AfterViewInit {
           this.updateAgendamentos();
         }
      })
+    } catch (error) {
+      
+    }
+  }
+
+
+  openModalAssinatura(tratamentoID: number){
+    try {
+      const modal = this.modalService.open(AssinaturaComponent, this.configModal);
+      modal.componentInstance.tratamentoID = tratamentoID;
     } catch (error) {
       
     }

@@ -15,7 +15,6 @@ export class AuthService {
   constructor(private http:  HttpClient, private userService: UserService) { }
 
   authenticate(usuario: Usuario) {
-    console.log("usuario: "+usuario.username);
     return this.http.post(API_URL + '/auth/login',  usuario , {observe: 'body'})
           .pipe(
             tap((response: userAuth | any) =>{

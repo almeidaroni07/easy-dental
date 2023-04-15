@@ -11,6 +11,7 @@
         
         <ul class="list-group list-group-light">
           <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let agendamento of agendamentos">
+            <p><a (click)="openModalAssinatura(agendamento.tratamentoID)"><i class="fa fa-pen"></i></a></p>
             <div>
               <div class="fw-bold">{{agendamento.paciente}}</div>
               <div class="text-muted">{{agendamento.procedimento}}</div>

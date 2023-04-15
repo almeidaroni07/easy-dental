@@ -6,6 +6,7 @@ import { HomeComponent } from "./home/home.component";
 import { PacienteComponent } from "./paciente/paciente.component";
 import { ProcedimentoComponent } from "./procedimento/procedimento.component";
 import { OrcamentoComponent } from "./orcamento/orcamento.component";
+import { ArquivosComponent } from "./arquivos/arquivos.component";
 
 
 const routes: Routes = [
@@ -37,6 +38,11 @@ const routes: Routes = [
             {
                 path: 'orcamento',
                 component: OrcamentoComponent,
+                canActivate:[AuthGuard]
+            },
+            {
+                path: 'arquivos',
+                component: ArquivosComponent,
                 canActivate:[AuthGuard]
             }           
         ]

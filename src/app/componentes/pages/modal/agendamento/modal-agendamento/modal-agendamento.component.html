@@ -37,7 +37,8 @@
                                 <div class="form-group">
                                     <label for="assinatura">Assinatura</label>
                                     <br>
-                                    <input type="file" class="form-control-file" id="assinatura" formControlName="assinatura">
+                                    <br>
+                                    <input type="file" class="form-control-file" id="assinatura" (change)="onChangeFile($event)">
                                 </div>
         
                             </div>

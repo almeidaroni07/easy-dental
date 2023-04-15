@@ -29,7 +29,6 @@ export class ProcedimentoService {
   }
 
   salvar(procedimento : ProcedimentoRequest){
-    console.log("");
     return this.http.post(API_URL + '/procedimento/v1/'+window.localStorage.getItem('authCustomer'), 
                           procedimento,
                           { headers: reqHeaderJson, responseType: 'text'});

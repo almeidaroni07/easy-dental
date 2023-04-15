@@ -1,5 +1,6 @@
 
 export interface AgendamentoResponse {
+    tratamentoID:number,
     agendamentoID:number,
     procedimento:number,
     paciente:string,

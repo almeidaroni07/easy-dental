@@ -26,6 +26,12 @@
           Procedimentos
         </a>
       </li>
+      <li class="nav-item" routerLink="/arquivos" routerLinkActive="activeLink" (click)="selecionarMenu('Arquivos')">
+        <a class="nav-link link-dark">
+         <i class="fa fa-file"></i>
+          Arquivo
+        </a>
+      </li>
       <li class="nav-item">
         <a class="nav-link link-dark" routerLink="/orcamento" routerLinkActive="activeLink" (click)="selecionarMenu('Orçamentos')">
           <i class="fa fa-shopping-cart"></i>
@@ -36,12 +42,6 @@
         <a class="nav-link link-dark">
           <i class="fa fa-coins"></i>
           Financeiro
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link link-dark">
-         <i class="fa fa-file"></i>
-          Arquivo
         </a>
       </li>
     </ul>

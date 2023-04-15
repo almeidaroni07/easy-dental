@@ -1,0 +1,43 @@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Novo Arquivo</h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="update()">
+    <div class="modal-body">
+
+        
+            <div class="row">
+                <div class="col-sm-12">
+                <div class="card border-0">
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label for="formAddPcienteNome">Nome</label>
+                            <input type="text" class="form-control" id="formAddPcienteNome" aria-describedby="emailHelp" placeholder="Nome" formControlName="nome">
+                            <app-validators-message message="Nome é um campo obrigatório."
+                                                    *ngIf="form.get('nome')?.errors && form.get('nome')?.touched"/>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="assinatura">Assinatura</label>
+                            <br>
+                            <br>
+                            <input type="file" class="form-control-file" id="assinatura" (change)="onChangeFile($event)">
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        
+        
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Cancelar</button>
+        <button type="submit" class="btn" [disabled]="!form.valid" [ngClass]="botaoHabilitado()">Salvar</button>
+    </div>
+</form>
