@@ -5,8 +5,7 @@ import { PreAnamnese } from '../model/preAnamnese';
 import { PreAnamneseRequest } from '../model/preAnamneseRequest';
 import { PreAvaliacao } from '../model/preAvaliacao';
 import { Paciente } from './paciente';
-
-const API_URL = 'http://localhost:8080';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +20,14 @@ export class PacienteService {
       'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
     })
 
-    return this.http.get(API_URL + '/paciente/v1/'+window.localStorage.getItem('authCustomer'),{ headers: reqHeader});
+    return this.http.get(environment.apiURL + '/paciente/v1/'+window.localStorage.getItem('authCustomer'),{ headers: reqHeader});
   }
 
   buscarPorID(id: number){
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
     })
-    return this.http.get(API_URL + '/paciente/v1/id/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+id,{ headers: reqHeader});
+    return this.http.get(environment.apiURL + '/paciente/v1/id/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+id,{ headers: reqHeader});
   }
   
 
@@ -39,7 +38,7 @@ export class PacienteService {
       'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
     })
 
-    return this.http.post(API_URL + '/paciente/v1/'+window.localStorage.getItem('authCustomer'), 
+    return this.http.post(environment.apiURL + '/paciente/v1/'+window.localStorage.getItem('authCustomer'), 
                           paciente,
                           { headers: reqHeader, responseType: 'text'});
   }
@@ -50,7 +49,7 @@ export class PacienteService {
       'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
     })
 
-    return this.http.put(API_URL + '/paciente/v1/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+pacienteId, 
+    return this.http.put(environment.apiURL + '/paciente/v1/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+pacienteId, 
                           paciente,
                           { headers: reqHeader, responseType: 'text'});
   }
@@ -60,7 +59,7 @@ export class PacienteService {
       'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
     })
 
-    return this.http.delete(API_URL + '/paciente/v1/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+pacienteId,{ headers: reqHeader, responseType: 'text'});
+    return this.http.delete(environment.apiURL + '/paciente/v1/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+pacienteId,{ headers: reqHeader, responseType: 'text'});
   }
 
 
@@ -68,7 +67,7 @@ export class PacienteService {
     const reqHeader = new HttpHeaders({
       'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
     })
-    return this.http.get(API_URL + '/paciente/v1/pre/anamnese/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+id,{ headers: reqHeader});
+    return this.http.get(environment.apiURL + '/paciente/v1/pre/anamnese/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+id,{ headers: reqHeader});
   }
 
   updatePreAnamnese(form: PreAnamneseRequest, pacienteId: number){
@@ -115,7 +114,7 @@ export class PacienteService {
       'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
     })
 
-    return this.http.put(API_URL + '/paciente/v1/pre/anamnese/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+pacienteId, 
+    return this.http.put(environment.apiURL + '/paciente/v1/pre/anamnese/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+pacienteId, 
                          preAnamnese,
                         { headers: reqHeader, responseType: 'text'});
 

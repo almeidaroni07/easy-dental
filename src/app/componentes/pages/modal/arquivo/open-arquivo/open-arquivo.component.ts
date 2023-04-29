@@ -10,8 +10,10 @@ import { ArquivoService } from 'src/app/core/arquivo/arquivo.service';
 export class OpenArquivoComponent implements OnInit {
   
 
-  url: string;
   @Input() arquivoID: number;
+  @Input() tipoArquivo: string;
+  url: string;
+  viewPDF: boolean;
 
   constructor(public activeModal: NgbActiveModal,
               private service: ArquivoService) { }
@@ -20,6 +22,7 @@ export class OpenArquivoComponent implements OnInit {
     try {
       this.url = this.service.getURLArquivo(this.arquivoID);
       console.log("url: "+this.url);
+      console.log("url: "+this.tipoArquivo);
     } catch (error) {
       
     }

@@ -6,22 +6,7 @@ import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, Cal
 import { EventColor } from 'calendar-utils';
 import { AgendamentoResponse } from 'src/app/core/model/angedamentoResponse';
 import { AgendamentoService } from 'src/app/core/agendamento/agendamento.service';
-import { DatePipe } from '@angular/common';
-
-const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import { Agenda } from 'src/app/core/model/agenda';
 
 
 @Component({
@@ -33,7 +18,7 @@ export class CalendarioComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
 
@@ -77,24 +62,16 @@ export class CalendarioComponent implements OnInit {
     try {
       this.events = [];
       this.service.getListAgendamento().subscribe(response =>{
-        let list: [AgendamentoResponse] | any = response;
-        for (let agendamento of list) {
-
-          console.log("Inicio: ",agendamento.dataHoraInicio);
-          console.log("Inicio: ",new Date(agendamento.dataHoraInicio));
-
-          console.log("Inicio: ",agendamento.dataHoraFim);
-          console.log("Inicio: ",new Date(agendamento.dataHoraFim));
-
+        let agenda: Agenda | any = response;
+        for (let agendamento of agenda.agendamentos) {
           this.events.push({
             start: startOfHour(new Date(agendamento.dataHoraInicio)),
             end: endOfHour(new Date(agendamento.dataHoraFim)),
             title: agendamento.paciente+' - '+agendamento.procedimento,
-            color: { ...colors['yellow'] },
+            color: agendamento.cor,
             actions: this.actions,
           })
         }
-        console.log("JSON: ",JSON.stringify(this.events));
 
       });
     } catch (error) {
@@ -147,7 +124,6 @@ export class CalendarioComponent implements OnInit {
         title: 'New event',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
-        color: colors['red'],
         draggable: true,
         resizable: {
           beforeStart: true,

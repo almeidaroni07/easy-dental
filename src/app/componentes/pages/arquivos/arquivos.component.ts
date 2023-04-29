@@ -97,10 +97,11 @@ export class ArquivosComponent implements OnInit {
 
 
 
-  openModalViewArquivo(arquivoID: number){
+  openModalViewArquivo(arquivoID: number, tipoArquivo: string){
     try {
       const modal = this.modalService.open(OpenArquivoComponent, this.configModal);
       modal.componentInstance.arquivoID = arquivoID;
+      modal.componentInstance.tipoArquivo = tipoArquivo;
     } catch (error) {
       
     }

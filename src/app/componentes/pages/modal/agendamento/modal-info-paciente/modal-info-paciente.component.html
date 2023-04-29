@@ -1,0 +1,174 @@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Anamnese do paciente: <span>{{nome}}</span></h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="update()" *ngIf="form">
+    <div class="modal-body">
+          
+        <img src={{url}} class="img-fluid rounded mx-auto d-block" alt="Responsive image">    
+
+         <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start" >
+            <mat-tab label="Anamnese">
+                <br>
+                <div class="row" id="panelAnamnese">
+                    <div class="col-sm-6">
+                    <div class="card border-0">
+                        <div class="card-body">
+                                
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="alergicoMedicamento" formControlName="alergicoMedicamento" (change)="alergicoMedicamentoChange()">
+                                <label class="custom-control-label" for="alergicoMedicamento">Alergico a medicamento?</label>
+    
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="alergicoMedicamentoQual" aria-describedby="emailHelp" placeholder="Qual?" formControlName="alergicoMedicamentoQual">
+                                </div>
+                            </div>
+    
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="usaMedicamento" formControlName="usaMedicamento" (change)="usaMedicamentoChange()">
+                                <label class="custom-control-label" for="usaMedicamento">Usa medicamentos?</label>
+    
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="usaMedicamentoQual" aria-describedby="emailHelp" placeholder="Qual?" formControlName="usaMedicamentoQual">
+                                </div>
+                            </div>
+    
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="alergicoAnestesia" formControlName="alergiaAnestesia" (change)="alergiaAnestesiaChange()">
+                                <label class="custom-control-label" for="alergicoAnestesia">Alergico a anestesia?</label>
+    
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="alergicoAnestesiaQual" aria-describedby="emailHelp" placeholder="Qual?" formControlName="alergiaAnestesiaQual">
+                                </div>
+                            </div>
+    
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="cirurgia" formControlName="cirurgia" (change)="cirurgiaChange()">
+                                <label class="custom-control-label" for="cirurgia">Cirurgia?</label>
+    
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="cirurgiaQual" aria-describedby="emailHelp" placeholder="Qual?" formControlName="cirurgiaQual">
+                                </div>
+                            </div>
+    
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="doencaCardio" formControlName="doencaCardioRespiratoria" (change)="doencaCardioRespiratoriaChange()">
+                                <label class="custom-control-label" for="doencaCardio">Tem doença cardio vasculatoria?</label>
+    
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="doencaCardioQual" aria-describedby="emailHelp" placeholder="Qual?" formControlName="doencaCardioRespiratoriaQual">
+                                </div>
+                            </div>
+    
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="doencatransmissivel" formControlName="doencaoTransmissivel" (change)="doencaoTransmissivelChange()">
+                                <label class="custom-control-label" for="doencatransmissivel">Tem doença transmissivel?</label>
+    
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="doencatransmissivelQual" aria-describedby="emailHelp" placeholder="Qual?" formControlName="doencaoTransmissivelQual">
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="diabetico" formControlName="diabetico">
+                                <label class="custom-control-label" for="diabetico">Diabetico?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="hipertencaoArterial" formControlName="hipertencaoArterial">
+                                <label class="custom-control-label" for="hipertencaoArterial">Hipertenção arterial?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="hemorragico" formControlName="hemorragico">
+                                <label class="custom-control-label" for="hemorragico">Hemorragico?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="gravidaOuAmamentando" formControlName="gravidaOuAmamentando">
+                                <label class="custom-control-label" for="gravidaOuAmamentando">Gravida ou Amamentando?</label>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Informações Adicionais</label>
+                                <textarea class="form-control" id="infosAdicionais" rows="8" formControlName="informacaoAdicional"></textarea>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Pré Avaliação">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                    <div class="card border-0">
+                        <div class="card-body">
+                                
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="corDentes" formControlName="corDentesIncomoda">
+                                <label class="custom-control-label" for="corDentes">Cor dos dentes incomoda?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="formatoDentes" formControlName="formatoDentesIncomoda">
+                                <label class="custom-control-label" for="formatoDentes">Formato dos dentes incomoda?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="fumante" formControlName="fumante">
+                                <label class="custom-control-label" for="fumante">Fumante?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="umAnoTratamento" formControlName="umAnoTratamento">
+                                <label class="custom-control-label" for="umAnoTratamento">Faz 1 ano o ultimo Tratamento?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="duasVezesAodia" formControlName="escovaDuasVezesDia">
+                                <label class="custom-control-label" for="duasVezesAodia">Escova os dentes 2x ao dia?</label>
+                            </div>
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="fioDentalTodosOsDias" formControlName="usaFioDental">
+                                <label class="custom-control-label" for="fioDentalTodosOsDias">Usa Fio dental todos os dias?</label>
+                            </div>
+    
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border-0">
+                            
+                            <br>
+                            <div class="form-group">
+                                <label for="principalQueixa">Principal queixa?</label>
+                                <textarea class="form-control" id="principalQueixa" rows="8" formControlName="queixa"></textarea>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Cancelar</button>
+        <button type="submit" class="btn">Salvar</button>
+    </div>
+</form>
+

@@ -1,0 +1,25 @@
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Informações do usuário</h5>
+        <button type="button" class="close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+          
+        <img src={{urlLogo}} class="mx-auto d-block rounded-circle" alt="..." width="200" height="200">
+        <br>
+        <br>
+        <div class="custom-control custom-checkbox">
+            <div class="form-group">
+                <div class="form-group">
+                    <input type="file" class="form-control-file" (change)="onChangeFile($event)">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Cancelar</button>
+        <button type="submit" class="btn" (click)="update()">Salvar</button>
+    </div>

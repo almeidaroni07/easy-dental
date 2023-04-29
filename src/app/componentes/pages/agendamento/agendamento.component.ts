@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAgendamentoComponent } from '../modal/agendamento/modal-agendamento/modal-agendamento.component';
 import { Response } from 'src/app/core/message/response';
 import { AgendamentoResponse } from 'src/app/core/model/angedamentoResponse';
 import { AgendamentoService } from 'src/app/core/agendamento/agendamento.service';
-import { AssinaturaComponent } from '../modal/agendamento/assinatura/assinatura.component';
+import { Agenda } from 'src/app/core/model/agenda';
+import { ModalInfoPacienteComponent } from '../modal/agendamento/modal-info-paciente/modal-info-paciente.component';
+import { CalendarioComponent } from '../templates/calendario/calendario.component';
 
 @Component({
   selector: 'app-agendamento',
@@ -27,6 +29,7 @@ export class AgendamentoComponent implements OnInit, AfterViewInit {
     centered: true
   };
 
+  @ViewChild(CalendarioComponent, {static:true}) componentCalendario: CalendarioComponent;
   responseMessage: Response = {error:false, message:''};
   agendamentos: any | AgendamentoResponse = [];
 
@@ -50,6 +53,7 @@ export class AgendamentoComponent implements OnInit, AfterViewInit {
         this.responseMessage = response;
         if(!this.responseMessage.error){
           this.updateAgendamentos();
+          this.componentCalendario.updateAgendamentos();
         }
      })
     } catch (error) {
@@ -58,10 +62,12 @@ export class AgendamentoComponent implements OnInit, AfterViewInit {
   }
 
 
-  openModalAssinatura(tratamentoID: number){
+  openModalInfoPaciente(tratamentoID: number, pacienteID: number, nomePaciente: string){
     try {
-      const modal = this.modalService.open(AssinaturaComponent, this.configModal);
+      const modal = this.modalService.open(ModalInfoPacienteComponent, this.configModal);
       modal.componentInstance.tratamentoID = tratamentoID;
+      modal.componentInstance.pacienteID = pacienteID;
+      modal.componentInstance.nome = nomePaciente;
     } catch (error) {
       
     }
@@ -71,14 +77,21 @@ export class AgendamentoComponent implements OnInit, AfterViewInit {
     try {
       this.agendamentos = [];
       this.service.getListAgendamento().subscribe(response =>{
-        let list: [AgendamentoResponse] | any = response;
-        for (let agendamento of list) {
-          this.agendamentos.push(agendamento);
+        let agenda: Agenda | any = response;
+        console.log("agenda.agendamentosHoje: "+agenda.agendamentosDeHoje);
+        if(undefined != agenda.agendamentosDeHoje && null != agenda.agendamentosDeHoje){
+          for (let agendamento of agenda.agendamentosDeHoje) {
+            this.agendamentos.push(agendamento);
+          }
         }
       });
     } catch (error) {
       console.error(error);
     }
+  }
+
+  styleColor(color: string){
+    return "background-color: "+color+";"
   }
 
 }

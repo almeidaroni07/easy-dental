@@ -4,7 +4,7 @@
 
   <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
     <a class="">
-      <img class="rounded mx-auto d-block" width="80" height="70" src="assets/img/logoDRAThais.png" />
+      <img class="rounded mx-auto d-block" width="80" height="70" src={{urlLogo}} />
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -26,31 +26,47 @@
           Procedimentos
         </a>
       </li>
+      
+
+      <li class="nav-item dropdown">
+        <a class="nav-link link-dark dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#menu-financeiro" aria-expanded="true">
+          <i class="fa fa-coins"></i>
+          Financeiro
+        </a>
+        <div class="collapse" id="menu-financeiro">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+            <li class="nav-item">
+              <a class="dropdown-item" routerLink="/orcamento" routerLinkActive="activeLink" (click)="selecionarMenu('Orçamentos')">
+                <i class="fa fa-shopping-cart"></i>
+                Orçamento
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" >
+                <i class="fa fa-coins"></i>
+                Entrada ou saida
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       <li class="nav-item" routerLink="/arquivos" routerLinkActive="activeLink" (click)="selecionarMenu('Arquivos')">
         <a class="nav-link link-dark">
          <i class="fa fa-file"></i>
           Arquivo
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link link-dark" routerLink="/orcamento" routerLinkActive="activeLink" (click)="selecionarMenu('Orçamentos')">
-          <i class="fa fa-shopping-cart"></i>
-          Orçamento
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link link-dark">
-          <i class="fa fa-coins"></i>
-          Financeiro
-        </a>
-      </li>
+
     </ul>
     <hr>
     <div class="dropdown">
       <a class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-         <img class="rounded-circle me-2" src="assets/img/foto.png" id="userLogin" width="30" height="30"> Dra Thais 
+         <img class="rounded-circle me-2" src={{urlFoto}} id="userLogin" width="60" height="60"> {{user?.iss}}
       </a>
       <div class="dropdown-menu text-small shadow">
+        <a class="dropdown-item" (click)="openModalAtualizarLogo()">Atualizar Logo</a>
+        <a class="dropdown-item" (click)="openModalInfoUsuario()">Informações</a>
         <a class="dropdown-item" (click)="logout()">Sair</a>
       </div>
     </div>

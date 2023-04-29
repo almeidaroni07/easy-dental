@@ -1,4 +1,5 @@
 export interface Arquivo {
     id:number,
-    nome:string	
+    nome:string,	
+    tipo:string
 }

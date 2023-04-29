@@ -11,12 +11,12 @@
         
         <ul class="list-group list-group-light">
           <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let agendamento of agendamentos">
-            <p><a (click)="openModalAssinatura(agendamento.tratamentoID)"><i class="fa fa-pen"></i></a></p>
+            <p><a (click)="openModalInfoPaciente(agendamento.tratamentoID, agendamento.pacienteID, agendamento.paciente)"><i class="fa fa-info"></i></a></p>
             <div>
               <div class="fw-bold">{{agendamento.paciente}}</div>
               <div class="text-muted">{{agendamento.procedimento}}</div>
             </div>
-            <span class="badge rounded-pill badge-success">{{agendamento.inicio}} - {{agendamento.fim}}</span>
+            <span class="badge rounded-pill" [ngStyle]="{'background-color':agendamento.cor.primary }">{{agendamento.inicio}} - {{agendamento.fim}}</span>
           </li>
         </ul>
       </div>

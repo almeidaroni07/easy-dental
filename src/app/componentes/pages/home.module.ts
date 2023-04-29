@@ -3,7 +3,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { MDBBootstrapModule } from "ng-uikit-pro-standard";
+import { DropdownModule, MDBBootstrapModule } from "ng-uikit-pro-standard";
 import { AgendamentoComponent } from "./agendamento/agendamento.component";
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home/home.component";
@@ -20,6 +20,7 @@ import { CalendarModule, DateAdapter } from "angular-calendar";
 import { CalendarioComponent } from "./templates/calendario/calendario.component";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { ProcedimentoComponent } from './procedimento/procedimento.component';
@@ -39,6 +40,11 @@ import { AddArquivoComponent } from './modal/arquivo/add-arquivo/add-arquivo.com
 import { OpenArquivoComponent } from './modal/arquivo/open-arquivo/open-arquivo.component';
 import { ModalEditarArquivoComponent } from './modal/arquivo/modal-editar-arquivo/modal-editar-arquivo.component';
 import { ModalDeleteArquivoComponent } from './modal/arquivo/modal-delete-arquivo/modal-delete-arquivo.component';
+import { UsuarioComponent } from './modal/usuario/usuario.component';
+import { SafePipe } from "src/app/core/util/safePipe";
+import { CustomerComponent } from './modal/customer/customer.component';
+import { PdfViewerModule } from "ng2-pdf-viewer";
+import { ModalInfoPacienteComponent } from './modal/agendamento/modal-info-paciente/modal-info-paciente.component';
 
 @NgModule({
     declarations:[
@@ -67,7 +73,11 @@ import { ModalDeleteArquivoComponent } from './modal/arquivo/modal-delete-arquiv
         AddArquivoComponent,
         OpenArquivoComponent,
         ModalEditarArquivoComponent,
-        ModalDeleteArquivoComponent
+        ModalDeleteArquivoComponent,
+        UsuarioComponent,
+        SafePipe,
+        CustomerComponent,
+        ModalInfoPacienteComponent
     ],
     imports:[
         CommonModule,
@@ -80,14 +90,15 @@ import { ModalDeleteArquivoComponent } from './modal/arquivo/modal-delete-arquiv
         MatFormFieldModule,
         MatDatepickerModule,
         MatInputModule,
+        MatSelectModule,
         MatNativeDateModule,
         FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory,
         }),
-        HomeRoutingModule
-        
+        HomeRoutingModule,
+        PdfViewerModule
     ],
     exports:[
         ValidatorsMessageComponent,

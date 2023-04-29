@@ -17,7 +17,7 @@
     <tr *ngFor="let el of elements; let i = index">
         <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"scope="row">{{ el.id }}</th>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{ el.nome }}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalViewArquivo(el.id)"><i class="fa fa-id-card"></i></a></td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalViewArquivo(el.id, el.tipo)"><i class="fa fa-id-card"></i></a></td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalEditArquivo(el.id)"><i class="fas fa-pencil-alt"></i></a></td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalDeleteArquivo(el.id, el.nome)"><i class="fa fa-trash"></i></a></td>
     </tr>

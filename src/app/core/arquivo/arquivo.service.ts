@@ -1,54 +1,65 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Arquivo } from '../model/arquivo';
-
-const API_URL = 'http://localhost:8080';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArquivoService {
   
-  reqHeader = new HttpHeaders({
-    'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
-  })
-  
-  reqHeaderPOSTOrPUT = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
-  })
-
-
   constructor(private http:  HttpClient) { }
 
   getArquivos(){
-    return this.http.get(API_URL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer'),{ headers: this.reqHeader});
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+    return this.http.get(environment.apiURL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer'),{ headers: reqHeader});
   }
 
   buscarPorID(id: number){
-    return this.http.get(API_URL + '/arquivo/v1/id/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+id,{ headers: this.reqHeader});
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+    return this.http.get(environment.apiURL + '/arquivo/v1/id/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+id,{ headers: reqHeader});
   }
 
   salvar(arquivo : Arquivo){
-    return this.http.post(API_URL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer'), {nome: arquivo.nome}, { headers: this.reqHeaderPOSTOrPUT, responseType: 'text'});
+    const reqHeaderPOSTOrPUT = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+    return this.http.post(environment.apiURL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer'), {nome: arquivo.nome}, { headers: reqHeaderPOSTOrPUT, responseType: 'text'});
   }
 
   update(arquivoID: number, arquivo: Arquivo){
-    return this.http.put(API_URL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID, {nome: arquivo.nome},{ headers: this.reqHeaderPOSTOrPUT, responseType: 'text'});
+    const reqHeaderPOSTOrPUT = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+    return this.http.put(environment.apiURL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID, {nome: arquivo.nome},{ headers: reqHeaderPOSTOrPUT, responseType: 'text'});
   }
 
   delete(arquivoID: number){
-    return this.http.delete(API_URL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID,{ headers: this.reqHeader, responseType: 'text'});
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+    return this.http.delete(environment.apiURL + '/arquivo/v1/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID,{ headers: reqHeader, responseType: 'text'});
   }
 
   atualizarArquivo(arquivoID : Number, file: File){
+
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+
     const formFile = new FormData();
     formFile.append('arquivo', file);
-    return this.http.post(API_URL + '/arquivo/v1/blob/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID, formFile, { headers: this.reqHeader, responseType: 'text'});
+    return this.http.post(environment.apiURL + '/arquivo/v1/blob/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID, formFile, { headers: reqHeader, responseType: 'text'});
   }
 
   getURLArquivo(arquivoID: Number){
-    return 'http://localhost:8080/arquivo/v1/blob/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID;
+    return environment.apiURL+'/arquivo/v1/blob/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID;
   }
 
 
