@@ -2,7 +2,7 @@
   "name": "easy-dental",
   "version": "0.0.0",
   "scripts": {
-    "npm": "npm config set legacy-peer-deps true",
+    "npm": "npm install --save --legacy-peer-deps",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration=production ",
