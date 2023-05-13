@@ -13,9 +13,6 @@ import { HomeModule } from './componentes/pages/home.module';
 import { registerLocaleData } from '@angular/common';
 import localePT from '@angular/common/locales/pt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ValidatorsMessageComponent } from './componentes/pages/templates/message/validators-message/validators-message.component';
-import { MessageComponent } from './componentes/pages/templates/message/message/message.component';
-
 
 
 registerLocaleData(localePT);
