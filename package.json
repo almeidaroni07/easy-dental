@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "npm": "npm install --save --legacy-peer-deps",
-    "ng": "ng",
+    "ng": "npm install --save --legacy-peer-deps",
     "start": "ng serve",
     "build": "ng build --configuration=production ",
     "watch": "ng build --watch --configuration development",
