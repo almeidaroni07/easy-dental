@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL:'http://easy-dental-api-production.up.railway.app'
+  apiURL:'https://easy-dental-api-production.up.railway.app'
 };
