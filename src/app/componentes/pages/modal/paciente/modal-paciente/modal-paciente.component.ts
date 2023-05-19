@@ -22,14 +22,14 @@ export class ModalPacienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      nome:['Roni', [Validators.required]],
-      email:['roni@gmail.com', [Validators.required, Validators.email]],
-      cpf:['40936986867', [Validators.required]],
-      rg:['370011387', [Validators.required]],
-      rua:['Rua Luiz grassmann 103', [Validators.required]],
-      bairro:['Jardim Mirante', [Validators.required]],
-      cidade:['São Paulo', [Validators.required]],
-      estado:['SP', [Validators.required]],
+      nome:['', [Validators.required]],
+      email:['', [Validators.required, Validators.email]],
+      cpf:['', [Validators.required]],
+      rg:['', [Validators.required]],
+      rua:['', [Validators.required]],
+      bairro:['', [Validators.required]],
+      cidade:['', [Validators.required]],
+      estado:['', [Validators.required]],
       dataNascimento:[this.datePipe.transform(new Date(),"yyyy-MM-dd"), [Validators.required]],
     })
   }
