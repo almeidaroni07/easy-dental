@@ -5,14 +5,17 @@
     </button>
 </div>
 
-<div class="modal-body">     
+<div class="modal-body">   
+    
+    <button (click)="printUrl()" type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-print"></i></button>
 
     <embed *ngIf="tipoArquivo != 'application/pdf'"
            [src]="url | safe" 
            class="img-fluid rounded mx-auto d-block" 
            width="60%" 
            height="60%" 
-           type={{tipoArquivo}}/>
+           type={{tipoArquivo}}
+           />
 
     <pdf-viewer *ngIf="tipoArquivo === 'application/pdf'"
                 [src]="url" 

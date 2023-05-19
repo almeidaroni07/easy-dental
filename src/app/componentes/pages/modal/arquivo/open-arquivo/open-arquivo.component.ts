@@ -21,8 +21,16 @@ export class OpenArquivoComponent implements OnInit {
   ngOnInit(): void {
     try {
       this.url = this.service.getURLArquivo(this.arquivoID);
-      console.log("url: "+this.url);
-      console.log("url: "+this.tipoArquivo);
+    } catch (error) {
+      
+    }
+  }
+
+  printUrl(){
+    try {
+      console.log("TESTE: "+this.url);
+      const w = window.open(this.url, '', 'width=1000,height=1000');
+      w?.print();
     } catch (error) {
       
     }
