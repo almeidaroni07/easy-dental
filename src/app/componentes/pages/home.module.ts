@@ -18,6 +18,7 @@ import { ModalUpdateAnamneseComponent } from './modal/paciente/modal-update-anam
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatCardModule } from '@angular/material/card'; 
+import { MatPaginatorModule} from '@angular/material/paginator';
 import { CalendarModule, DateAdapter } from "angular-calendar";
 import { CalendarioComponent } from "./templates/calendario/calendario.component";
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -96,6 +97,7 @@ import { ModalInfoPacienteComponent } from './modal/agendamento/modal-info-pacie
         MatSelectModule,
         MatNativeDateModule,
         MatCardModule,
+        MatPaginatorModule,
         FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,

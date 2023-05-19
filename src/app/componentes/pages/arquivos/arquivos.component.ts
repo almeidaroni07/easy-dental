@@ -8,6 +8,8 @@ import { AddArquivoComponent } from '../modal/arquivo/add-arquivo/add-arquivo.co
 import { OpenArquivoComponent } from '../modal/arquivo/open-arquivo/open-arquivo.component';
 import { ModalEditarArquivoComponent } from '../modal/arquivo/modal-editar-arquivo/modal-editar-arquivo.component';
 import { ModalDeleteArquivoComponent } from '../modal/arquivo/modal-delete-arquivo/modal-delete-arquivo.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-arquivos',
@@ -16,18 +18,10 @@ import { ModalDeleteArquivoComponent } from '../modal/arquivo/modal-delete-arqui
 })
 export class ArquivosComponent implements OnInit {
 
-  @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
-  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
-  elements: any | Arquivo = [];
-  previous: any = [];
-  headElements = ['ID', 'Nome', '', '', ''];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  tableArquivos: Arquivo[] = [{ id:1, 
-                           nome:'teste', 
-                           tipo:'pdf'},
-                           { id:2, 
-                            nome:'teste', 
-                            tipo:'pdf'}];
+  tableArquivos: Arquivo[] = [];
+  dataSource = new MatTableDataSource<Arquivo>(this.tableArquivos);
   displayedColumns: string[] = ['id', 'nome', 'tipo', 'detalhe', 'editar', 'deletar'];
 
   responseMessage: Response = {error:false, message:''};
@@ -49,6 +43,7 @@ export class ArquivosComponent implements OnInit {
   constructor(private cdRef: ChangeDetectorRef,
               private modalService: NgbModal,
               private service: ArquivoService){}
+
 
   ngOnInit(): void {
     this.updateTable();
@@ -118,22 +113,14 @@ export class ArquivosComponent implements OnInit {
 
   updateTable(){
     try {
-      this.elements = [];
       this.service.getArquivos().subscribe(resp =>{
         let arquivos: Arquivo | any = resp;
         
         this.tableArquivos = arquivos;
+        this.dataSource = new MatTableDataSource<Arquivo>(this.tableArquivos);
+        this.dataSource.paginator = this.paginator;
         console.log(JSON.stringify(arquivos));
-        
-        for (var paci of arquivos) {
-          this.elements.push(paci);
-        }
 
-        if(undefined != this.mdbTable){
-          this.mdbTable.setDataSource(this.elements);
-          this.elements = this.mdbTable.getDataSource();
-          this.previous = this.mdbTable.getDataSource();
-        }
       });
     } catch (error) {
       console.error(error);
