@@ -3,7 +3,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { DropdownModule, MDBBootstrapModule } from "ng-uikit-pro-standard";
+import { MDBBootstrapModule } from "ng-uikit-pro-standard";
 import { AgendamentoComponent } from "./agendamento/agendamento.component";
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home/home.component";
@@ -16,11 +16,13 @@ import { ModalEditarComponent } from './modal/paciente/modal-editar/modal-editar
 import { ModalDeleteComponent } from './modal/paciente/modal-delete/modal-delete.component';
 import { ModalUpdateAnamneseComponent } from './modal/paciente/modal-update-anamnese/modal-update-anamnese.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table'; 
+import { MatCardModule } from '@angular/material/card'; 
 import { CalendarModule, DateAdapter } from "angular-calendar";
 import { CalendarioComponent } from "./templates/calendario/calendario.component";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { ProcedimentoComponent } from './procedimento/procedimento.component';
@@ -83,6 +85,7 @@ import { ModalInfoPacienteComponent } from './modal/agendamento/modal-info-pacie
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        MatTableModule,
         NgbModule,
         HttpClientModule,
         MDBBootstrapModule,
@@ -92,6 +95,7 @@ import { ModalInfoPacienteComponent } from './modal/agendamento/modal-info-pacie
         MatInputModule,
         MatSelectModule,
         MatNativeDateModule,
+        MatCardModule,
         FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,

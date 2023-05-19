@@ -22,6 +22,14 @@ export class ArquivosComponent implements OnInit {
   previous: any = [];
   headElements = ['ID', 'Nome', '', '', ''];
 
+  tableArquivos: Arquivo[] = [{ id:1, 
+                           nome:'teste', 
+                           tipo:'pdf'},
+                           { id:2, 
+                            nome:'teste', 
+                            tipo:'pdf'}];
+  displayedColumns: string[] = ['id', 'nome', 'tipo', 'detalhe', 'editar', 'deletar'];
+
   responseMessage: Response = {error:false, message:''};
 
   configModal = {
@@ -113,6 +121,10 @@ export class ArquivosComponent implements OnInit {
       this.elements = [];
       this.service.getArquivos().subscribe(resp =>{
         let arquivos: Arquivo | any = resp;
+        
+        this.tableArquivos = arquivos;
+        console.log(JSON.stringify(arquivos));
+        
         for (var paci of arquivos) {
           this.elements.push(paci);
         }
