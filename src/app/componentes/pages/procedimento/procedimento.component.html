@@ -1,38 +1,50 @@
 
-  
-  <div class="container-fluid">
-
     <app-message message={{responseMessage.message}}
                 class="{{true == responseMessage.error ? 'alert-danger' : 'alert-success'}}"
                 *ngIf="'' != responseMessage.message"/>
 
-      <button (click)="openModalAdd()" type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-plus"></i> Adicionar</button>
+    <button (click)="openModalAdd()" type="button" class="btn btn-info btn-circle btn-lg rounded"><i class="fa fa-plus"></i> Adicionar</button>
+
+    <mat-card>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-striped table-hover">
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef class="table-light text-primary" scope="col"> ID. </th>
+            <td mat-cell *matCellDef="let procedimento"> {{ procedimento.id }} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef class="table-light text-primary" scope="col"> Nome </th>
+            <td mat-cell *matCellDef="let procedimento"> {{ procedimento.nome }} </td>
+          </ng-container>
   
-      <table mdbTable #tableEl="mdbTable" class="table table-striped">
-        <thead>
-        <tr>
-          <th *ngFor="let head of headElements; let i = index" scope="col">{{ head }}
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let el of elements; let i = index">
-          <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"scope="row">{{ el.id }}</th>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{ el.nome }}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{ el.valor }}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><div class="col-sm-10"><input id="inputCor" ejs-colorpicker type="color" value="{{el.cor}}" cssClass="e-custom-picker" disabled/></div></td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalEditPaciente(el.id)"><i class="fas fa-pencil-alt"></i></a></td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="openModalDeletePaciente(el.id, el.nome)"><i class="fa fa-trash"></i></a></td>
-        </tr>
-        </tbody>
-        <tfoot class="">
-        <tr>
-          <td colspan="4">
-            <div class="position-absolute end-0">
-              <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
-            </div>
-          </td>
-        </tr>
-        </tfoot>
+          <ng-container matColumnDef="valor">
+              <th mat-header-cell *matHeaderCellDef class="table-light text-primary" scope="col"> Valor </th>
+              <td mat-cell *matCellDef="let procedimento"> {{ procedimento.valor }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cor">
+            <th mat-header-cell *matHeaderCellDef class="table-light text-primary" scope="col"> Cor </th>
+            <td mat-cell *matCellDef="let procedimento"> <div class="col-sm-10"><input id="inputCor" ejs-colorpicker type="color" value="{{procedimento.cor}}" cssClass="e-custom-picker" disabled/></div></td>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef class="table-light text-primary float-end" scope="col">  </th>
+            <td mat-cell *matCellDef="let procedimento"><a (click)="openModalEditPaciente(procedimento.id)"><i class="fas fa-pencil-alt"></i></a></td>
+          </ng-container>
+          
+          <ng-container matColumnDef="deletar">
+              <th mat-header-cell *matHeaderCellDef class="table-light text-primary float-end" scope="col">  </th>
+              <td mat-cell *matCellDef="let procedimento"><a (click)="openModalDeletePaciente(procedimento.id, procedimento.nome)"><i class="fa fa-trash"></i></a></td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-    </div>
+      <mat-paginator #paginator
+                     [pageSizeOptions]="[5, 10, 20]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+  </mat-card>

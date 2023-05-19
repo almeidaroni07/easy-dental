@@ -7,19 +7,15 @@ import { ProcedimentoService } from 'src/app/core/procedimento/procedimento.serv
 import { ModalAddProcedimentoComponent } from '../modal/procedimento/modal-add-procedimento/modal-add-procedimento.component';
 import { ModalDeletarProcedimentoComponent } from '../modal/procedimento/modal-deletar-procedimento/modal-deletar-procedimento.component';
 import { ModalEditarProcedimentoComponent } from '../modal/procedimento/modal-editar-procedimento/modal-editar-procedimento.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-procedimento',
   templateUrl: './procedimento.component.html',
   styleUrls: ['./procedimento.component.css']
 })
-export class ProcedimentoComponent implements OnInit, AfterViewInit {
-
-  @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
-  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
-  elements: any | Procedimento = [{id:1, nome:'faceta', preco:4000}];
-  previous: any = [];
-  headElements = ['ID', 'Nome', 'valor', 'Cor', '', ''];
+export class ProcedimentoComponent implements OnInit {
 
   responseMessage: Response = {error:false, message:''};
 
@@ -31,20 +27,14 @@ export class ProcedimentoComponent implements OnInit, AfterViewInit {
   };
 
 
-  constructor(private cdRef: ChangeDetectorRef,
-              private modalService: NgbModal,
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  tableArquivos: Procedimento [] = [];
+  displayedColumns: string[] = ['id', 'nome', 'valor', 'cor', 'editar', 'deletar'];
+  dataSource = new MatTableDataSource<Procedimento>(this.tableArquivos);
+
+  constructor(private modalService: NgbModal,
               private service:  ProcedimentoService){}
-
-
-  ngAfterViewInit(): void {
-    if(undefined != this.mdbTablePagination){
-      this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
-  
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    }
-    this.cdRef.detectChanges();
-  }
 
   ngOnInit(): void {
     this.updateTable();
@@ -106,18 +96,14 @@ export class ProcedimentoComponent implements OnInit, AfterViewInit {
 
   updateTable(){
     try {
-      this.elements = [];
       this.service.getProcedimentos().subscribe(resp =>{
         let procedimentos: Procedimento | any = resp;
-        for (var paci of procedimentos) {
-          this.elements.push(paci);
-        }
 
-        if(undefined != this.mdbTable){
-          this.mdbTable.setDataSource(this.elements);
-          this.elements = this.mdbTable.getDataSource();
-          this.previous = this.mdbTable.getDataSource();
-        }
+        this.tableArquivos = procedimentos;
+        this.dataSource = new MatTableDataSource<Procedimento>(this.tableArquivos);
+        this.dataSource.paginator = this.paginator;
+        console.log(JSON.stringify(procedimentos));
+
       });
     } catch (error) {
       console.error(error);

@@ -10,8 +10,8 @@
     <embed *ngIf="tipoArquivo != 'application/pdf'"
            [src]="url | safe" 
            class="img-fluid rounded mx-auto d-block" 
-           width="100%" 
-           height="100%" 
+           width="60%" 
+           height="60%" 
            type={{tipoArquivo}}/>
 
     <pdf-viewer *ngIf="tipoArquivo === 'application/pdf'"

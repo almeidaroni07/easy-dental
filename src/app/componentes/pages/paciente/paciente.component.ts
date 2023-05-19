@@ -1,6 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MdbTableDirective, MdbTablePaginationComponent } from 'ng-uikit-pro-standard';
 import { Response } from 'src/app/core/message/response';
 import { Paciente } from 'src/app/core/model/paciente';
 import { PacienteService } from 'src/app/core/paciente/paciente.service';
@@ -8,19 +7,15 @@ import { ModalUpdateAnamneseComponent } from '../modal/paciente/modal-update-ana
 import { ModalDeleteComponent } from '../modal/paciente/modal-delete/modal-delete.component';
 import { ModalEditarComponent } from '../modal/paciente/modal-editar/modal-editar.component';
 import { ModalPacienteComponent } from '../modal/paciente/modal-paciente/modal-paciente.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-paciente',
   templateUrl: './paciente.component.html',
   styleUrls: ['./paciente.component.css']
 })
-export class PacienteComponent implements OnInit, AfterViewInit  {
-
-  @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
-  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
-  elements: any | Paciente = [];
-  previous: any = [];
-  headElements = ['ID', 'Nome', 'Email', 'Status', 'Ultima Consulta', '', '', ''];
+export class PacienteComponent implements OnInit  {
 
   responseMessage: Response = {error:false, message:''};
 
@@ -39,21 +34,17 @@ export class PacienteComponent implements OnInit, AfterViewInit  {
   };
 
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  tableArquivos: Paciente [] = [];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'status', 'ultimaconsulta', 'anamnese', 'editar', 'deletar'];
+  dataSource = new MatTableDataSource<Paciente>(this.tableArquivos);
+
+
   constructor(private cdRef: ChangeDetectorRef,
               private modalService: NgbModal,
               private service: PacienteService){}
 
-
-  ngAfterViewInit(): void {
-    if(undefined != this.mdbTablePagination){
-      this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
-  
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    }
-    this.cdRef.detectChanges();
-  }
- 
 
   ngOnInit(): void {
     this.updateTable();
@@ -129,18 +120,13 @@ export class PacienteComponent implements OnInit, AfterViewInit  {
 
   updateTable(){
     try {
-      this.elements = [];
+
       this.service.getListPacientes().subscribe(resp =>{
         let pacientes: Paciente | any = resp;
-        for (var paci of pacientes) {
-          this.elements.push(paci);
-        }
-
-        if(undefined != this.mdbTable){
-          this.mdbTable.setDataSource(this.elements);
-          this.elements = this.mdbTable.getDataSource();
-          this.previous = this.mdbTable.getDataSource();
-        }
+        this.tableArquivos = pacientes;
+        this.dataSource = new MatTableDataSource<Paciente>(this.tableArquivos);
+        this.dataSource.paginator = this.paginator;
+        console.log(JSON.stringify(pacientes));
       });
     } catch (error) {
       console.error(error);

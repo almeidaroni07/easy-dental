@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MdbTableDirective, MdbTablePaginationComponent } from 'ng-uikit-pro-standard';
 import { ArquivoService } from 'src/app/core/arquivo/arquivo.service';
 import { Response } from 'src/app/core/message/response';
 import { Arquivo } from 'src/app/core/model/arquivo';
@@ -21,8 +20,8 @@ export class ArquivosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   tableArquivos: Arquivo[] = [];
-  dataSource = new MatTableDataSource<Arquivo>(this.tableArquivos);
   displayedColumns: string[] = ['id', 'nome', 'tipo', 'detalhe', 'editar', 'deletar'];
+  dataSource = new MatTableDataSource<Arquivo>(this.tableArquivos);
 
   responseMessage: Response = {error:false, message:''};
 
