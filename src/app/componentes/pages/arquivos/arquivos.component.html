@@ -8,8 +8,15 @@
         <table mdbTable #tableEl="mdbTable" class="table table-striped table-hover table-bordered" >
             <thead>
                 <tr>
-                    <th class="table-light text-primary th-sm" *ngFor="let head of headElements; let i = index" scope="col">{{ head }}
+                    <th class="table-light text-primary th-sm" scope="col">
+                        ID
                     </th>
+                    <th class="table-light text-primary th-sm" scope="col">
+                        Nome
+                    </th>
+                    <th class="table-light text-primary th-sm float-end" scope="col"></th>
+                    <th class="table-light text-primary th-sm float-end" scope="col"></th>
+                    <th class="table-light text-primary th-sm float-end" scope="col"></th>
                 </tr>
             </thead>
             <tbody>
