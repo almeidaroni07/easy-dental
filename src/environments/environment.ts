@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL:'http://easy-dental-api-production.up.railway.app'
+  apiURL:'http://localhost:8080'
 };
 
 /*

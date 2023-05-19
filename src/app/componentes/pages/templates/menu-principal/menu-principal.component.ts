@@ -53,7 +53,7 @@ export class MenuPrincipalComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.urlFoto = this.userService.getURLFoto(this.user?.sub);
+    this.urlFoto = this.userService.getURLFoto(this.user?.id);
     this.urlLogo = this.customerService.getURLLogo();
     this.menuSelecionado.emit('Agendamentos');
   }
@@ -76,7 +76,7 @@ export class MenuPrincipalComponent implements OnInit {
     try {
       const modal =  this.modalService.open(UsuarioComponent, this.configModal);
        
-      modal.componentInstance.id = this.user?.sub;
+      modal.componentInstance.id = this.user?.id;
       modal.componentInstance.passMessage.subscribe((response: Response) => {
          this.responseMessage = response;
       })
