@@ -48,6 +48,7 @@ import { SafePipe } from "src/app/core/util/safePipe";
 import { CustomerComponent } from './modal/customer/customer.component';
 import { PdfViewerModule } from "ng2-pdf-viewer";
 import { ModalInfoPacienteComponent } from './modal/agendamento/modal-info-paciente/modal-info-paciente.component';
+import { ModalCancelarAgendamentoComponent } from './modal/agendamento/modal-cancelar-agendamento/modal-cancelar-agendamento.component';
 
 @NgModule({
     declarations:[
@@ -80,7 +81,8 @@ import { ModalInfoPacienteComponent } from './modal/agendamento/modal-info-pacie
         UsuarioComponent,
         SafePipe,
         CustomerComponent,
-        ModalInfoPacienteComponent
+        ModalInfoPacienteComponent,
+        ModalCancelarAgendamentoComponent
     ],
     imports:[
         CommonModule,

@@ -55,7 +55,6 @@ export class ModalAgendamentoComponent implements OnInit {
   salvar(){
     this.service.salvar(this.form.value, this.elements).subscribe(resp =>{
       const tratamentoID : number | any = resp;
-      console.log("file name: "+this.file.name);
       this.service.atualizarAssinatura(tratamentoID, this.file).subscribe(
         
         resp =>{

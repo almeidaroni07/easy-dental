@@ -1,12 +1,11 @@
 import { Component, ViewChild, TemplateRef, Input, OnInit} from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, startOfHour, endOfHour } from 'date-fns';
+import { startOfDay, endOfDay, isSameDay, isSameMonth, addHours, startOfHour, endOfHour } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView, } from 'angular-calendar';
-import { EventColor } from 'calendar-utils';
-import { AgendamentoResponse } from 'src/app/core/model/angedamentoResponse';
 import { AgendamentoService } from 'src/app/core/agendamento/agendamento.service';
 import { Agenda } from 'src/app/core/model/agenda';
+import { ModalCancelarAgendamentoComponent } from '../../modal/agendamento/modal-cancelar-agendamento/modal-cancelar-agendamento.component';
 
 
 @Component({
@@ -27,17 +26,24 @@ export class CalendarioComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  configModal = {
+    backdrop: false,
+    ignoreBackdropClick: false,
+    size: 'xl',
+    centered: true
+  };
+
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
+      a11yLabel: 'Atualizar status',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
       },
     },
     {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
+      label: '<i class="fa-regular fa-xmark"></i>',
+      a11yLabel: 'Cancelar Agendamento',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
         this.handleEvent('Deleted', event);
@@ -49,7 +55,7 @@ export class CalendarioComponent implements OnInit {
   activeDayIsOpen: boolean = true;
   events: CalendarEvent[] = [];
 
-  constructor(private modal: NgbModal,
+  constructor(private modalService: NgbModal,
               private service: AgendamentoService) {}
 
 
@@ -63,13 +69,18 @@ export class CalendarioComponent implements OnInit {
       this.events = [];
       this.service.getListAgendamento().subscribe(response =>{
         let agenda: Agenda | any = response;
+
+        console.log(JSON.stringify(agenda));
+
         for (let agendamento of agenda.agendamentos) {
           this.events.push({
-            start: startOfHour(new Date(agendamento.dataHoraInicio)),
-            end: endOfHour(new Date(agendamento.dataHoraFim)),
+
+            start: startOfHour(new Date(agendamento.inicio)),
+            end: endOfHour(new Date(agendamento.fim)),
             title: agendamento.paciente+' - '+agendamento.procedimento,
             color: agendamento.cor,
             actions: this.actions,
+
           })
         }
 
@@ -113,8 +124,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    const modal = this.modalService.open(ModalCancelarAgendamentoComponent, this.configModal);
   }
 
   addEvent(): void {

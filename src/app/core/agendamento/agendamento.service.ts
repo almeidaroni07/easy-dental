@@ -31,7 +31,6 @@ export class AgendamentoService {
       pacienteID:tratamento.pacienteID,
       procedimentos:procedimentos
     }
-
     return this.http.post(environment.apiURL + '/tratamento/v1/'+window.localStorage.getItem('authCustomer')+'?pacienteId='+tratamento.pacienteID, envio, { headers: reqHeaderPOSTOrPUT, responseType: 'text'});
   }
 
