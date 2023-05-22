@@ -25,8 +25,9 @@ export class ModalUpdateAnamneseComponent  implements OnInit {
               private service: PacienteService) { }
 
   ngOnInit(): void {
-
+    console.log('this.id: '+this.id)
     this.service.buscarPreAvaliacaoEAnamnesePorID(this.id).subscribe((resp: PreAnamnese | any)  =>{
+      console.log(JSON.stringify(resp));
       this.anamnese = resp.anamnese;
       const pre: PreAvaliacao = resp.preAvaliacao;
       this.form = this.formBuilder.group({

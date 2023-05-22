@@ -28,9 +28,7 @@ export class OpenArquivoComponent implements OnInit {
 
   printUrl(){
     try {
-      console.log("TESTE: "+this.url);
-      const w = window.open(this.url, '', 'width=1000,height=1000');
-      w?.print();
+      this.service.printArquivo(this.arquivoID);
     } catch (error) {
       
     }

@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Arquivo } from '../model/arquivo';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,18 @@ export class ArquivoService {
 
   getURLArquivo(arquivoID: Number){
     return environment.apiURL+'/arquivo/v1/blob/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID;
+  }
+
+  printArquivo(arquivoID: Number){
+    fetch(environment.apiURL + '/arquivo/v1/blob/'+window.localStorage.getItem('authCustomer')+'?arquivoID='+arquivoID)
+    .then(function(response) {
+      return response.blob();
+    })
+    .then(function(myBlob) {
+      const objectURL = URL.createObjectURL(myBlob);
+      const w = window.open(objectURL, '', 'width=1000,height=1000');
+      w?.print();
+    });
   }
 
 
