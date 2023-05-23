@@ -2,7 +2,7 @@ import { CommonModule, DatePipe } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbAlertModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MDBBootstrapModule } from "ng-uikit-pro-standard";
 import { AgendamentoComponent } from "./agendamento/agendamento.component";
 import { HomeRoutingModule } from "./home-routing.module";
@@ -48,7 +48,7 @@ import { SafePipe } from "src/app/core/util/safePipe";
 import { CustomerComponent } from './modal/customer/customer.component';
 import { PdfViewerModule } from "ng2-pdf-viewer";
 import { ModalInfoPacienteComponent } from './modal/agendamento/modal-info-paciente/modal-info-paciente.component';
-import { ModalCancelarAgendamentoComponent } from './modal/agendamento/modal-cancelar-agendamento/modal-cancelar-agendamento.component';
+import { ModalStatusAgendamentoComponent } from './modal/agendamento/modal-status-agendamento/modal-status-agendamento.component';
 
 @NgModule({
     declarations:[
@@ -82,7 +82,7 @@ import { ModalCancelarAgendamentoComponent } from './modal/agendamento/modal-can
         SafePipe,
         CustomerComponent,
         ModalInfoPacienteComponent,
-        ModalCancelarAgendamentoComponent
+        ModalStatusAgendamentoComponent
     ],
     imports:[
         CommonModule,
@@ -106,7 +106,8 @@ import { ModalCancelarAgendamentoComponent } from './modal/agendamento/modal-can
             useFactory: adapterFactory,
         }),
         HomeRoutingModule,
-        PdfViewerModule
+        PdfViewerModule,
+        NgbAlertModule 
     ],
     exports:[
         ValidatorsMessageComponent,

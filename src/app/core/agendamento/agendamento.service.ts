@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Agendamento } from '../model/agendamento';
 import { Tratamento } from '../model/tratamento';
 import { environment } from 'src/environments/environment';
+import { StatusPaciente } from '../model/statusPaciente';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,25 @@ export class AgendamentoService {
 
   buscarAssinatura(tratamentoID: Number){
     return environment.apiURL+'/tratamento/v1/assinatura/'+window.localStorage.getItem('authCustomer')+'?tratamentoID='+tratamentoID;
+  }
+
+  getListStatusAgendamento(){
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+    return this.http.get(environment.apiURL + '/agenda/v1/status/'+window.localStorage.getItem('authCustomer'),{ headers: reqHeader});
+  }
+
+  updateStatusConsulta(agendamentoID: number, statusConsulta: string){
+    const reqHeader = new HttpHeaders({
+      'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`
+    })
+
+    const statusEnv : StatusPaciente = {
+      id:statusConsulta,
+      status:statusConsulta
+    }
+    return this.http.put(environment.apiURL + '/agenda/v1/status/'+window.localStorage.getItem('authCustomer')+'?agendamentoID='+agendamentoID, statusEnv, { headers: reqHeader, responseType: 'text'});
   }
 
 }

@@ -1,0 +1,35 @@
+
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Assinatura do Paciente</h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="salvar()" *ngIf="form">
+    <div class="modal-body">     
+   
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card border-0">
+                    <div class="card-body">
+                            
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" id="status" formControlName="status">
+                                <option *ngFor="let paciente of status" value= {{paciente.id}}> {{paciente.status}} </option>
+                            </select>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="activeModal.close()">Fechar</button>
+        <button type="submit" class="btn" >Salvar</button>
+    </div>
+</form>
+
+

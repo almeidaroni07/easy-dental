@@ -1,8 +1,6 @@
 <div class="row">
 
-  <app-message message={{responseMessage.message}}
-                class="{{true == responseMessage.error ? 'alert-danger' : 'alert-success'}}"
-                *ngIf="'' != responseMessage.message"/>
+  <app-message message={{responseMessage.message}} type="{{true == responseMessage.error ? 'danger' : 'success'}}" *ngIf="'' != responseMessage.message"/>
 
   <div class="col-sm-4">
     <div class="card border-0">

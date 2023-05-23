@@ -14,6 +14,8 @@ import { ProcedimentoService } from 'src/app/core/procedimento/procedimento.serv
   styleUrls: ['./modal-agendamento.component.css']
 })
 export class ModalAgendamentoComponent implements OnInit {
+  
+  @Output() passMessage: EventEmitter<any> = new EventEmitter();
 
   elements: any | Agendamento = [];
   headElements = ['Nome', 'data', 'Inicio', 'Fim',  ''];
@@ -21,7 +23,6 @@ export class ModalAgendamentoComponent implements OnInit {
   selectPacientes: [Paciente] | any  = [];
   selectProcedimento: [Procedimento] | any  = [];
 
-  @Output() passMessage: EventEmitter<any> = new EventEmitter();
   form !: FormGroup;
   file: File;
   

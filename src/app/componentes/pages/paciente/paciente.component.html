@@ -1,7 +1,5 @@
 
-  <app-message message={{responseMessage.message}}
-              class="{{true == responseMessage.error ? 'alert-danger' : 'alert-success'}}"
-              *ngIf="'' != responseMessage.message"/>
+  <app-message message={{responseMessage.message}} type="{{true == responseMessage.error ? 'danger' : 'success'}}" *ngIf="'' != responseMessage.message"/>
 
   <button (click)="openModalAddPaciente()" type="button" class="btn btn-info btn-circle btn-lg rounded"><i class="fa fa-plus"></i> Adicionar</button>
 

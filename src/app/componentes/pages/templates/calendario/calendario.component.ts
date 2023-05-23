@@ -1,11 +1,11 @@
-import { Component, ViewChild, TemplateRef, Input, OnInit} from '@angular/core';
+import { Component, ViewChild, TemplateRef, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import { startOfDay, endOfDay, isSameDay, isSameMonth, addHours, startOfHour, endOfHour } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView, } from 'angular-calendar';
 import { AgendamentoService } from 'src/app/core/agendamento/agendamento.service';
 import { Agenda } from 'src/app/core/model/agenda';
-import { ModalCancelarAgendamentoComponent } from '../../modal/agendamento/modal-cancelar-agendamento/modal-cancelar-agendamento.component';
+import { ModalStatusAgendamentoComponent } from '../../modal/agendamento/modal-status-agendamento/modal-status-agendamento.component';
 
 
 @Component({
@@ -16,6 +16,7 @@ import { ModalCancelarAgendamentoComponent } from '../../modal/agendamento/modal
 export class CalendarioComponent implements OnInit {
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @Output() passMessage: EventEmitter<any> = new EventEmitter();
 
   view: CalendarView = CalendarView.Week;
   CalendarView = CalendarView;
@@ -33,27 +34,24 @@ export class CalendarioComponent implements OnInit {
     centered: true
   };
 
+  refresh = new Subject<void>();
+  activeDayIsOpen: boolean = true;
+  events: CalendarEvent[] = [];
+
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
       a11yLabel: 'Atualizar status',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        const modal = this.modalService.open(ModalStatusAgendamentoComponent, this.configModal);
+          modal.componentInstance.id = event.id;
+          modal.componentInstance.passMessage.subscribe((response: Response) => {
+          this.passMessage.emit(response);
+        })
       },
-    },
-    {
-      label: '<i class="fa-regular fa-xmark"></i>',
-      a11yLabel: 'Cancelar Agendamento',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
+    }
   ];
 
-  refresh = new Subject<void>();
-  activeDayIsOpen: boolean = true;
-  events: CalendarEvent[] = [];
 
   constructor(private modalService: NgbModal,
               private service: AgendamentoService) {}
@@ -69,18 +67,19 @@ export class CalendarioComponent implements OnInit {
       this.events = [];
       this.service.getListAgendamento().subscribe(response =>{
         let agenda: Agenda | any = response;
-
-        console.log(JSON.stringify(agenda));
-
         for (let agendamento of agenda.agendamentos) {
           this.events.push({
 
             start: startOfHour(new Date(agendamento.inicio)),
             end: endOfHour(new Date(agendamento.fim)),
-            title: agendamento.paciente+' - '+agendamento.procedimento,
-            color: agendamento.cor,
+            title: '<h6 class="">'+agendamento.paciente+'</h6><br>'+agendamento.procedimento,
+            color: {
+              primary: agendamento.cor.primary,
+              secondary: agendamento.cor.primary
+            },
+            id: agendamento.agendamentoID,
             actions: this.actions,
-
+            cssClass: ''
           })
         }
 
@@ -91,19 +90,14 @@ export class CalendarioComponent implements OnInit {
   }
 
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
+  setView(view: CalendarView) {
+    this.view = view;
   }
+
+  closeOpenMonthViewDay() {
+    this.activeDayIsOpen = false;
+  }
+
 
   eventTimesChanged({
     event,
@@ -124,35 +118,21 @@ export class CalendarioComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    const modal = this.modalService.open(ModalCancelarAgendamentoComponent, this.configModal);
+    
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
   }
 
 }

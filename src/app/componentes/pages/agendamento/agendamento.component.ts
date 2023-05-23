@@ -78,7 +78,6 @@ export class AgendamentoComponent implements OnInit, AfterViewInit {
       this.agendamentos = [];
       this.service.getListAgendamento().subscribe(response =>{
         let agenda: Agenda | any = response;
-        console.log("agenda.agendamentosHoje: "+agenda.agendamentosDeHoje);
         if(undefined != agenda.agendamentosDeHoje && null != agenda.agendamentosDeHoje){
           for (let agendamento of agenda.agendamentosDeHoje) {
             this.agendamentos.push(agendamento);
